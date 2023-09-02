@@ -1,4 +1,5 @@
 import { IonCol, IonContent, IonGrid, IonHeader, IonPage, IonRow, IonTitle, IonToolbar } from '@ionic/react';
+import { useState } from 'react';
 import Blurb from '../components/Blurb';
 import FeedbackBox from '../components/FeedbackBox';
 import FollowUpQuestion from '../components/FollowUpQuestion';
@@ -7,6 +8,8 @@ import SubmitButton from '../components/SubmitButton';
 import './Home.css';
 
 const Home: React.FC = () => {
+  const [rated, setRated] = useState(false);
+
   return (
     <IonPage>
       <IonHeader>
@@ -28,9 +31,12 @@ const Home: React.FC = () => {
           </IonRow>
           <IonRow>
             <IonCol>
-              <Rating />              
+              <Rating setRated={setRated}/>              
             </IonCol>
           </IonRow>
+
+          {rated === true &&
+          <>
           <IonRow>
             <IonCol>
               <FollowUpQuestion />              
@@ -46,6 +52,8 @@ const Home: React.FC = () => {
               <SubmitButton />              
             </IonCol>
           </IonRow>
+          </>
+          }
         </IonGrid>
       </IonContent>
     </IonPage>
