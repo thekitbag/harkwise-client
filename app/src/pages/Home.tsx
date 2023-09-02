@@ -1,4 +1,5 @@
 import { IonCol, IonContent, IonGrid, IonHeader, IonPage, IonRow, IonTitle, IonToolbar } from '@ionic/react';
+import { State } from 'ionicons/dist/types/stencil-public-runtime';
 import { useState } from 'react';
 import Blurb from '../components/Blurb';
 import FeedbackBox from '../components/FeedbackBox';
@@ -8,7 +9,15 @@ import SubmitButton from '../components/SubmitButton';
 import './Home.css';
 
 const Home: React.FC = () => {
-  const [rated, setRated] = useState(false);
+  const [rated, setRated] = useState({rated: false, rating: 0});
+
+  const followUpText = () => {
+    if(rated.rating > 3.5) {
+      return "What made The Crooked Billet so good?"
+    } else {
+      return "How could The Crooked Billet have been better?"
+    }
+  }
 
   return (
     <IonPage>
@@ -35,11 +44,11 @@ const Home: React.FC = () => {
             </IonCol>
           </IonRow>
 
-          {rated === true &&
+          {rated.rated === true &&
           <>
           <IonRow>
             <IonCol>
-              <FollowUpQuestion />              
+              <FollowUpQuestion followUpQuestion={followUpText()}/>       
             </IonCol>
           </IonRow>
           <IonRow>
