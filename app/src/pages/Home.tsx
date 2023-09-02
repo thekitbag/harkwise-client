@@ -1,4 +1,4 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
+import { IonCol, IonContent, IonGrid, IonHeader, IonPage, IonRow, IonTitle, IonToolbar } from '@ionic/react';
 import Blurb from '../components/Blurb';
 import FeedbackBox from '../components/FeedbackBox';
 import FollowUpQuestion from '../components/FollowUpQuestion';
@@ -20,11 +20,33 @@ const Home: React.FC = () => {
             <IonTitle size="large">Howzat</IonTitle>
           </IonToolbar>
         </IonHeader>
-        <Blurb />
-        <Rating />
-        <FollowUpQuestion />
-        <FeedbackBox />
-        <SubmitButton />
+        <IonGrid>
+          <IonRow>
+            <IonCol>
+              <Blurb />
+            </IonCol>
+          </IonRow>
+          <IonRow>
+            <IonCol>
+              <Rating />              
+            </IonCol>
+          </IonRow>
+          <IonRow>
+            <IonCol>
+              <FollowUpQuestion />              
+            </IonCol>
+          </IonRow>
+          <IonRow>
+            <IonCol>        
+              <FeedbackBox />              
+            </IonCol>
+          </IonRow>
+          <IonRow>
+            <IonCol>
+              <SubmitButton />              
+            </IonCol>
+          </IonRow>
+        </IonGrid>
       </IonContent>
     </IonPage>
   );

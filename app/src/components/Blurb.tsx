@@ -6,7 +6,7 @@ interface BlurbProps {
 }
 
 const Blurb: React.FC<BlurbProps> = () => {
-    return <IonHeader>How was your experience at The Crooked Billet?</IonHeader>
+    return <h1>How was your experience at The Crooked Billet?</h1>
 }
 
 export default Blurb
