@@ -12,6 +12,7 @@ import './Home.css';
 const Home: React.FC = () => {
   const [rated, setRated] = useState({rated: false, rating: 0});
   const [establishmentName, setEstablishmentName] = useState<string>('');
+  const [comment, setComment] = useState('')
   const { establishmentName: nameFromUrl } = useParams<{ establishmentName?: string }>();
 
   useEffect(() => {
@@ -27,6 +28,32 @@ const Home: React.FC = () => {
       return "How could " + establishmentName + " have been better?"
     }
   }
+
+  const handleSubmit = async (event: React.FormEvent) => {
+    event.preventDefault();
+    if (comment.length <= 160) {
+      try {
+        const response = await fetch('/api/rating', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ comment:comment, rating:rated.rating }),
+        });
+
+        if (response.ok) {
+          console.log('Rating and comment sent successfully');
+          setComment(''); 
+        } else {
+          console.error('Failed to send rating and comment');
+        }
+      } catch (error) {
+        console.error('Error occurred:', error);
+      }
+    } else {
+      console.error('Comment exceeds the 160 character limit');
+    }
+  };
 
   return (
     <IonPage>
@@ -62,12 +89,12 @@ const Home: React.FC = () => {
           </IonRow>
           <IonRow>
             <IonCol>        
-              <FeedbackBox />              
+              <FeedbackBox setComment={setComment}/>              
             </IonCol>
           </IonRow>
           <IonRow>
             <IonCol>
-              <SubmitButton />              
+              <SubmitButton handleSubmit={handleSubmit}/>              
             </IonCol>
           </IonRow>
           </>
