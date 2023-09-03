@@ -1,6 +1,7 @@
 import { IonCol, IonContent, IonGrid, IonHeader, IonPage, IonRow, IonTitle, IonToolbar } from '@ionic/react';
 import { State } from 'ionicons/dist/types/stencil-public-runtime';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import Blurb from '../components/Blurb';
 import FeedbackBox from '../components/FeedbackBox';
 import FollowUpQuestion from '../components/FollowUpQuestion';
@@ -10,12 +11,20 @@ import './Home.css';
 
 const Home: React.FC = () => {
   const [rated, setRated] = useState({rated: false, rating: 0});
+  const [establishmentName, setEstablishmentName] = useState<string>('');
+  const { establishmentName: nameFromUrl } = useParams<{ establishmentName?: string }>();
+
+  useEffect(() => {
+    if (nameFromUrl) {
+      setEstablishmentName(nameFromUrl);
+    }
+  }, [nameFromUrl]);
 
   const followUpText = () => {
     if(rated.rating > 3.5) {
-      return "What made The Crooked Billet so good?"
+      return "What made " + establishmentName  + " so good?"
     } else {
-      return "How could The Crooked Billet have been better?"
+      return "How could " + establishmentName + " have been better?"
     }
   }
 
@@ -35,7 +44,7 @@ const Home: React.FC = () => {
         <IonGrid>
           <IonRow>
             <IonCol>
-              <Blurb />
+              <Blurb establishment={establishmentName}/>
             </IonCol>
           </IonRow>
           <IonRow>
