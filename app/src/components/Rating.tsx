@@ -11,9 +11,9 @@ const Rating: React.FC<RatingProps> = ({setRated}) => {
     <IonCard>
         <IonCardContent>
             <IonButton color="danger" onClick = { ()=> setRated({rated: true, rating: 1}) }>Awful</IonButton>
-            <IonButton color="warning" onClick = { ()=> setRated({rated: true, rating: 2}) }>Bad</IonButton>
+            <IonButton color="danger" onClick = { ()=> setRated({rated: true, rating: 2}) }>Bad</IonButton>
             <IonButton color="medium" onClick = { ()=> setRated({rated: true, rating: 3}) }>OK</IonButton>
-            <IonButton color="primary" onClick = { ()=> setRated({rated: true, rating: 4}) }>Good</IonButton>
+            <IonButton color="success" onClick = { ()=> setRated({rated: true, rating: 4}) }>Good</IonButton>
             <IonButton color="success" onClick = { ()=> setRated({rated: true, rating: 5}) }>Amazing</IonButton>
         </IonCardContent>
     </IonCard>
