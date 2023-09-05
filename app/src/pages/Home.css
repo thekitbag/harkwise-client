@@ -1,0 +1,11 @@
+ion-row {
+    text-align: center;
+}
+
+ion-header {
+    font-size: 28px;
+}
+
+ion-textarea { 
+    background-color: inherit;
+}
