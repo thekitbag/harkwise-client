@@ -33,7 +33,7 @@ const Home: React.FC = () => {
     event.preventDefault();
     if (comment.length <= 160) {
       try {
-        const response = await fetch('/api/rating', {
+        const response = await fetch('/api/review', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
