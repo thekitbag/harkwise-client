@@ -1,6 +1,6 @@
 import { IonCol, IonContent, IonGrid, IonHeader, IonPage, IonRow, IonTitle, IonToolbar } from '@ionic/react';
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import Blurb from '../components/Blurb';
 import FeedbackBox from '../components/FeedbackBox';
 import FollowUpQuestion from '../components/FollowUpQuestion';
@@ -13,6 +13,7 @@ const Home: React.FC = () => {
   const [establishmentName, setEstablishmentName] = useState<string>('');
   const [comment, setComment] = useState('')
   const { establishmentId } = useParams<{ establishmentId?: string }>();
+  const history = useHistory();
   
   useEffect(() => {
     const fetchEstablishmentName = async () => {
@@ -22,7 +23,10 @@ const Home: React.FC = () => {
                 if (response.ok) {
                     const data = await response.json();
                     setEstablishmentName(data.name);
-                } else {
+                } else if (response.status === 404 ) {
+                    history.push('/establishmentNotFound');
+                }
+                else {
                     console.error('Failed to fetch establishment name.');
                 }
             } catch (error) {
