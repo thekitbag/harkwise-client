@@ -1,5 +1,4 @@
 import { IonCol, IonContent, IonGrid, IonHeader, IonPage, IonRow, IonTitle, IonToolbar } from '@ionic/react';
-import { State } from 'ionicons/dist/types/stencil-public-runtime';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Blurb from '../components/Blurb';
@@ -13,13 +12,29 @@ const Home: React.FC = () => {
   const [rated, setRated] = useState({rated: false, rating: 0});
   const [establishmentName, setEstablishmentName] = useState<string>('');
   const [comment, setComment] = useState('')
-  const { establishmentName: nameFromUrl } = useParams<{ establishmentName?: string }>();
-
+  const { establishmentId } = useParams<{ establishmentId?: string }>();
+  
   useEffect(() => {
-    if (nameFromUrl) {
-      setEstablishmentName(nameFromUrl);
-    }
-  }, [nameFromUrl]);
+    const fetchEstablishmentName = async () => {
+        if (establishmentId) {
+            try {
+                const response = await fetch(`/api/get_establishment_details/${establishmentId}`);
+                if (response.ok) {
+                    const data = await response.json();
+                    setEstablishmentName(data.name);
+                } else {
+                    console.error('Failed to fetch establishment name.');
+                }
+            } catch (error) {
+                console.error('Error fetching establishment name:', error);
+            }
+        }
+    };
+
+    fetchEstablishmentName();
+}, [establishmentId]);
+
+  
 
   const followUpText = () => {
     if(rated.rating > 3.5) {
@@ -38,7 +53,11 @@ const Home: React.FC = () => {
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ comment:comment, rating:rated.rating }),
+          body: JSON.stringify({
+            establishmentId: establishmentId,
+            comment:comment,
+            rating:rated.rating
+           }),
         });
 
         if (response.ok) {
