@@ -1,4 +1,3 @@
-import { IonHeader } from '@ionic/react'
 import React from 'react'
 
 interface BlurbProps {

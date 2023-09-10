@@ -6,6 +6,43 @@ ion-header {
     font-size: 28px;
 }
 
-ion-textarea { 
-    background-color: inherit;
+body {
+    background-color: var(--background-color);
+    color: var(--text-primary);
+    font-family: 'Arial', sans-serif;
 }
+
+h1, h2, h3 {
+    color: var(--primary-color);
+}
+
+p, span {
+    color: var(--text-secondary);
+}
+
+button, .btn {
+    background-color: var(--accent-color);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover, .btn:hover {
+    background-color: darken(var(--accent-color), 10%);
+}
+
+.emoji {
+    background-color: rgba(126, 211, 33, 0.1); /* 10% opacity of the soft green */
+    padding: 2px;
+    border-radius: 50%;  /* Makes the background circular */
+}
+
+.emoji-container {
+    display: flex;
+    justify-content: space-between; /* evenly distribute space between the emojis */
+    align-items: center; /* center them vertically */
+  }

@@ -14,7 +14,7 @@ const Home: React.FC = () => {
   const [comment, setComment] = useState('')
   const { establishmentId } = useParams<{ establishmentId?: string }>();
   const history = useHistory();
-  
+
   useEffect(() => {
     const fetchEstablishmentName = async () => {
         if (establishmentId) {
@@ -65,8 +65,8 @@ const Home: React.FC = () => {
         });
 
         if (response.ok) {
-          console.log('Rating and comment sent successfully');
-          setComment(''); 
+          setComment('');
+          history.push('/success');
         } else {
           console.error('Failed to send rating and comment');
         }

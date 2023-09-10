@@ -5,7 +5,7 @@ import { IonReactRouter } from '@ionic/react-router';
 import Home from './pages/Home';
 import Splash from './pages/Splash';
 import NotFound from './pages/NotFound';
-
+import Success from './pages/Success';
 
 
 /* Core CSS required for Ionic components to work properly */
@@ -34,6 +34,7 @@ const App: React.FC = () => (
     <IonReactRouter>
       <IonRouterOutlet>
         <Switch>
+          <Route exact path="/success" component={Success} />
           <Route exact path="/" component={Splash} />
           <Route path="/establishmentNotFound" component={NotFound} />
           <Route path="/:establishmentId" component={Home} />

@@ -14,9 +14,6 @@ const NotFound: React.FC = () => {
           <IonText style={{ fontSize: '1.5em', marginBottom: '20px' }}>
             Oops! The establishment you're looking for does not exist.
           </IonText>
-          <IonButton routerLink="/" color="primary" expand="block">
-            Go to Home
-          </IonButton>
         </div>
       </IonContent>
     </IonPage>
