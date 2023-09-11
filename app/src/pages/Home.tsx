@@ -82,13 +82,13 @@ const Home: React.FC = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>Howzat</IonTitle>
+          <IonTitle>Harkwise</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
         <IonHeader collapse="condense">
           <IonToolbar>
-            <IonTitle size="large">Howzat</IonTitle>
+            <IonTitle size="large">Harkwise</IonTitle>
           </IonToolbar>
         </IonHeader>
         <IonGrid>

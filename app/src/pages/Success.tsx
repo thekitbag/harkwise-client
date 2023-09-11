@@ -7,7 +7,7 @@ const Success: React.FC = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>Howzat</IonTitle>
+          <IonTitle>Harkwise</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent className="ion-padding">

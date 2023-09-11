@@ -4,13 +4,13 @@ import { mailOutline } from 'ionicons/icons';
 
 const Splash: React.FC = () => {
   const email = "mfgray87@gmail.com";
-  const subject = encodeURIComponent("I want to start using Howzat!");
+  const subject = encodeURIComponent("I want to start using Harkwise!");
 
   return (
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>Howzat</IonTitle>
+          <IonTitle>Harkwise</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent className="ion-padding">
