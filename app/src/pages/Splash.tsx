@@ -1,37 +1,19 @@
 import React, { useState } from 'react';
 import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonButton, IonIcon, IonText, IonItem, IonLabel, IonList, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonInput } from '@ionic/react';
-import { checkmarkOutline } from 'ionicons/icons';
+import { checkmarkOutline, thumbsUpOutline } from 'ionicons/icons';
 import mainLogo from '../assets/Original Logo.png'
 import './Home.css';
+import {emailValidation, useForm} from '../utils/emailValidation';
 
 
 const Splash: React.FC = () => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-
-  const [errors, setErrors] = useState<{ name?: string, email?: string }>({});
-
-  const validate = () => {
-    let tempErrors: { name?: string, email?: string } = {};
-
-    if (!name.trim()) {
-        tempErrors.name = "Name is required";
-    }
-
-    if (!email.trim()) {
-        tempErrors.email = "Email is required";
-    } else if (!/\S+@\S+\.\S+/.test(email)) {  // simple regex for email
-        tempErrors.email = "Email is not valid";
-    }
-
-    setErrors(tempErrors);
-
-    return Object.keys(tempErrors).length === 0;  // returns true if no errors
-}
-
+  const { name, setName, email, setEmail, errors, validate } = useForm();
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleSubmit = async () => {
     if (!validate()) return;  // Don't proceed if there are validation errors
+
+    console.log('trying to handle submit')
 
     try {
       const response = await fetch('/api/interest', {
@@ -44,7 +26,7 @@ const Splash: React.FC = () => {
       
       const data = await response.json();
       if (data.status === 'success') {
-        // Handle success (e.g., show a success message)
+        setIsSubmitted(true); 
       } else {
         // Handle error
       }
@@ -95,6 +77,17 @@ const Splash: React.FC = () => {
             <IonCardTitle>Get Started with Harkwise</IonCardTitle>
           </IonCardHeader>
           <IonCardContent>
+          {isSubmitted ? (
+          // Display this JSX when the form is successfully submitted
+          <div className="submission-success-container">
+            <IonIcon icon={thumbsUpOutline} style={{ fontSize: '4em' }} />
+            <IonText>
+              <h2>Thank You!</h2>
+              <p>We've received your details and will be in touch shortly.</p>
+            </IonText>
+          </div>
+        ) : (
+          <>
             Enter your details and we'll be in touch shortly.
             <IonInput
               value={name}
@@ -111,6 +104,9 @@ const Splash: React.FC = () => {
             <IonButton expand="block" onClick={handleSubmit}>
               Submit
             </IonButton>
+          </>
+            )
+          }       
           </IonCardContent>
         </IonCard>
 
