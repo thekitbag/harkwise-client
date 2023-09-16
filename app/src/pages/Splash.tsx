@@ -9,7 +9,30 @@ const Splash: React.FC = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
 
+  const [errors, setErrors] = useState<{ name?: string, email?: string }>({});
+
+  const validate = () => {
+    let tempErrors: { name?: string, email?: string } = {};
+
+    if (!name.trim()) {
+        tempErrors.name = "Name is required";
+    }
+
+    if (!email.trim()) {
+        tempErrors.email = "Email is required";
+    } else if (!/\S+@\S+\.\S+/.test(email)) {  // simple regex for email
+        tempErrors.email = "Email is not valid";
+    }
+
+    setErrors(tempErrors);
+
+    return Object.keys(tempErrors).length === 0;  // returns true if no errors
+}
+
+
   const handleSubmit = async () => {
+    if (!validate()) return;  // Don't proceed if there are validation errors
+
     try {
       const response = await fetch('/api/interest', {
         method: 'POST',
@@ -78,11 +101,13 @@ const Splash: React.FC = () => {
               placeholder="Your Name"
               onIonChange={(e) => setName(e.detail.value!)}
             />
+            {errors.name && <p style={{ color: 'red' }}>{errors.name}</p>}
             <IonInput
               value={email}
               placeholder="Your Email"
               onIonChange={(e) => setEmail(e.detail.value!)}
             />
+            {errors.email && <p style={{ color: 'red' }}>{errors.email}</p>}
             <IonButton expand="block" onClick={handleSubmit}>
               Submit
             </IonButton>
