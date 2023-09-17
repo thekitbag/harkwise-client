@@ -2,8 +2,12 @@ import React, { useState } from 'react';
 import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonButton, IonIcon, IonText, IonItem, IonLabel, IonList, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonInput } from '@ionic/react';
 import { checkmarkOutline, thumbsUpOutline } from 'ionicons/icons';
 import mainLogo from '../assets/Original Logo.png'
-import './Home.css';
+import './Splash.css';
 import {emailValidation, useForm} from '../utils/emailValidation';
+
+import feature1 from '../assets/qrscan.jpeg';
+import feature2 from '../assets/report.jpeg';
+import feature3 from '../assets/money.jpeg';
 
 
 const Splash: React.FC = () => {
@@ -36,7 +40,7 @@ const Splash: React.FC = () => {
   };
 
   return (
-    <IonPage>
+    <IonPage className="splash-page">
 
       <IonHeader>
         <IonToolbar>
@@ -47,31 +51,38 @@ const Splash: React.FC = () => {
       </IonHeader>
 
       <IonContent className="ion-padding">
-
-        <div className="logo-container">
-          <img src={mainLogo} alt="Harkwise Logo"></img>
+        {/* Hero Section */}
+        <div className="hero-section">
+          <div className="logo-container">
+            <img src={mainLogo} alt="Harkwise Logo"></img>
+          </div>
+          <h2>Unlock the Power of Customer Feedback</h2>
         </div>
 
-        <IonText>
-          <h2>Unlock the Power of Real-Time Customer Feedback</h2>
-          <p>Bridge the gap between the digital and physical realms. Use instant insights from your customers to refine, innovate, and elevate their experience. Join top businesses in making every visit even better.</p>
-        </IonText>
-
-        <IonList>
-          <IonItem>
-            <IonIcon icon={checkmarkOutline} slot="start"></IonIcon>
+        {/* Features Section */}
+        <div className="features-grid">
+          <IonCard className="feature-card">
+            <img src={feature1} alt="Feature 1"/>
             <IonLabel>Immediate Customer Insights</IonLabel>
-          </IonItem>
-          <IonItem>
-            <IonIcon icon={checkmarkOutline}  slot="start"></IonIcon>
-            <IonLabel>Real-time Feedback Collection</IonLabel>
-          </IonItem>
-          <IonItem>
-            <IonIcon icon={checkmarkOutline}  slot="start"></IonIcon>
+          </IonCard>
+          <IonCard className="feature-card">
+            <img src={feature2} alt="Feature 2"/>
+            <IonLabel>AI Synthesised Insights</IonLabel>
+          </IonCard>
+          <IonCard className="feature-card">
+            <img src={feature3} alt="Feature 3"/>
             <IonLabel>Empower Business Decisions</IonLabel>
-          </IonItem>
-        </IonList>
+          </IonCard>
+        </div>
 
+        {/* About Us Section */}
+        <div className="about-section">
+          <h2>About Harkwise</h2>
+          <h3>We help business understand what their cutomers REALLY think about their products and services so they can make sure they keep coming back</h3>
+          <p>Our QR Codes make it easy for your customers to tell you what they do and don't like about your establishment, allowing you to make changes that really move the needle</p>
+        </div>
+
+        <div className='cta-section'>
         <IonCard>
           <IonCardHeader>
             <IonCardTitle>Get Started with Harkwise</IonCardTitle>
@@ -109,9 +120,8 @@ const Splash: React.FC = () => {
           }       
           </IonCardContent>
         </IonCard>
-
+        </div>
       </IonContent>
-
     </IonPage>
   );
 };

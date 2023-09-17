@@ -7,6 +7,8 @@ import FollowUpQuestion from '../components/FollowUpQuestion';
 import Rating from '../components/Rating'
 import SubmitButton from '../components/SubmitButton';
 import './Home.css';
+import mainLogo from '../assets/Original Logo Symbol.png'
+
 
 const Home: React.FC = () => {
   const [rated, setRated] = useState({rated: false, rating: 0});
@@ -81,9 +83,10 @@ const Home: React.FC = () => {
   return (
     <IonPage>
       <IonHeader>
-        <IonToolbar>
-          <IonTitle>Harkwise</IonTitle>
-        </IonToolbar>
+      <IonToolbar>
+        <img src={mainLogo} alt="Harkwise Logo" style={{height: '40px', marginRight: '10px'}} />
+        <IonTitle>Harkwise</IonTitle>
+      </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
         <IonHeader collapse="condense">

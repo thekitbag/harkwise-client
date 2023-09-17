@@ -46,14 +46,3 @@ button:hover, .btn:hover {
     justify-content: space-between; /* evenly distribute space between the emojis */
     align-items: center; /* center them vertically */
   }
-
-  .logo-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 20px;
-  }
-  
-  .logo-container img {
-    max-width: 200px;
-  }
