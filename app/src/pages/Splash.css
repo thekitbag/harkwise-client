@@ -7,11 +7,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 40px;
 }
   
 .logo-container img {
-    max-width: 200px;
+    max-width: 120px;
     border-radius: 10px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s;
@@ -89,9 +88,8 @@ ion-button:hover {
 /* Hero Section */
 .hero-section {
     background-color: #e5e7eb;
-    padding: 40px 0;
+    padding: 14px 0;
     border-radius: 20px;
-    margin-bottom: 30px;
     text-align: center;
 }
 
@@ -103,11 +101,19 @@ ion-button:hover {
     margin-bottom: 30px;
 }
 
+/* Media query for smaller screens, adjust the max-width as needed */
+@media (max-width: 600px) {
+    .features-grid {
+        grid-template-columns: 1fr; /* One column layout for smaller screens */
+    }
+}
+
 .feature-card {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 20px;
+    padding: 10px;
+    margin: 10px;
     text-align: center;
 }
 
@@ -122,17 +128,12 @@ ion-button:hover {
     margin-bottom: 10px;
 }
 
+
 /* CTA Section */
 .cta-section {
     background-color: #f7f9fc;
-    padding: 40px;
+    padding: 8px;
     border-radius: 20px;
-}
-
-/* Hero Section */
-.logo-container img {
-    max-width: 200px;
-    margin-bottom: 30px;  
 }
 
 /* About Us Section */

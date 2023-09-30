@@ -1,4 +1,4 @@
-import { IonCol, IonContent, IonGrid, IonHeader, IonPage, IonRow, IonTitle, IonToolbar } from '@ionic/react';
+import { IonCol, IonContent, IonGrid, IonHeader, IonImg, IonPage, IonRow, IonTitle, IonToolbar } from '@ionic/react';
 import { useEffect, useState } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import Blurb from '../components/Blurb';
@@ -6,6 +6,7 @@ import FeedbackBox from '../components/FeedbackBox';
 import FollowUpQuestion from '../components/FollowUpQuestion';
 import Rating from '../components/Rating'
 import SubmitButton from '../components/SubmitButton';
+import ReviewSite from '../utils/types';
 import './Home.css';
 import mainLogo from '../assets/Original Logo Symbol.png'
 
@@ -13,32 +14,38 @@ import mainLogo from '../assets/Original Logo Symbol.png'
 const Home: React.FC = () => {
   const [rated, setRated] = useState({rated: false, rating: 0});
   const [establishmentName, setEstablishmentName] = useState<string>('');
+  const [publicReviewSites, setPublicReviewSites] = useState<ReviewSite[]>([]);
+  const [captureEmail, setCaptureEmail] = useState<boolean>(false);
   const [comment, setComment] = useState('')
   const { establishmentId } = useParams<{ establishmentId?: string }>();
   const history = useHistory();
 
   useEffect(() => {
-    const fetchEstablishmentName = async () => {
+    const fetchEstablishmentDetails = async () => {
         if (establishmentId) {
             try {
                 const response = await fetch(`/api/get_establishment_details/${establishmentId}`);
                 if (response.ok) {
                     const data = await response.json();
                     setEstablishmentName(data.name);
+                    setPublicReviewSites(data.publicReviewSites || []);
+                    setCaptureEmail(data.captureEmail);
                 } else if (response.status === 404 ) {
                     history.push('/establishmentNotFound');
                 }
                 else {
-                    console.error('Failed to fetch establishment name.');
+                    console.error('Failed to fetch establishment details.');
                 }
             } catch (error) {
-                console.error('Error fetching establishment name:', error);
+                console.error('Error fetching establishment details:', error);
             }
         }
     };
 
-    fetchEstablishmentName();
+    fetchEstablishmentDetails();
 }, [establishmentId]);
+
+
 
   
 
@@ -68,7 +75,16 @@ const Home: React.FC = () => {
 
         if (response.ok) {
           setComment('');
-          history.push('/success');
+          history.push({
+            pathname: '/success',
+            state: {
+              establishmentName: establishmentName,
+              establishmentId: establishmentId,
+              rating: rated.rating,
+              publicReviewSites: publicReviewSites,
+              captureEmail: captureEmail
+            }
+          });
         } else {
           console.error('Failed to send rating and comment');
         }
@@ -83,14 +99,14 @@ const Home: React.FC = () => {
   return (
     <IonPage>
       <IonHeader>
-      <IonToolbar>
-        <img src={mainLogo} alt="Harkwise Logo" style={{height: '40px', marginRight: '10px'}} />
+      <IonToolbar className="logo-toolbar">
         <IonTitle>Harkwise</IonTitle>
       </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
         <IonHeader collapse="condense">
           <IonToolbar>
+            <IonImg>{mainLogo}</IonImg>
             <IonTitle size="large">Harkwise</IonTitle>
           </IonToolbar>
         </IonHeader>

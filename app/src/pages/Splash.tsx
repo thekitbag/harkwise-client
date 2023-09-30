@@ -3,7 +3,7 @@ import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonButton, IonIco
 import { checkmarkOutline, thumbsUpOutline } from 'ionicons/icons';
 import mainLogo from '../assets/Original Logo.png'
 import './Splash.css';
-import {emailValidation, useForm} from '../utils/emailValidation';
+import {emailValidation, useForm} from '../utils/EmailValidation';
 
 import feature1 from '../assets/qrscan.jpeg';
 import feature2 from '../assets/report.jpeg';
@@ -63,11 +63,12 @@ const Splash: React.FC = () => {
         <div className="features-grid">
           <IonCard className="feature-card">
             <img src={feature1} alt="Feature 1"/>
-            <IonLabel>Immediate Customer Insights</IonLabel>
+            <IonLabel>Easy Feedback Collection</IonLabel>
           </IonCard>
           <IonCard className="feature-card">
             <img src={feature2} alt="Feature 2"/>
             <IonLabel>AI Synthesised Insights</IonLabel>
+            <IonButton onClick = {() => window.location.href = '/report'}>Example Report</IonButton>
           </IonCard>
           <IonCard className="feature-card">
             <img src={feature3} alt="Feature 3"/>
@@ -77,8 +78,7 @@ const Splash: React.FC = () => {
 
         {/* About Us Section */}
         <div className="about-section">
-          <h2>About Harkwise</h2>
-          <h3>We help business understand what their cutomers REALLY think about their products and services so they can make sure they keep coming back</h3>
+          <h3>We help businesses understand what their cutomers REALLY think about their products and services so they can make sure they keep coming back</h3>
           <p>Our QR Codes make it easy for your customers to tell you what they do and don't like about your establishment, allowing you to make changes that really move the needle</p>
         </div>
 

@@ -6,7 +6,7 @@ import Home from './pages/Home';
 import Splash from './pages/Splash';
 import NotFound from './pages/NotFound';
 import Success from './pages/Success';
-
+import Report from './pages/ExampleReport';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -27,13 +27,18 @@ import '@ionic/react/css/display.css';
 /* Theme variables */
 import './theme/variables.css';
 
+/*GTM*/
+import initGTM from './utils/gtm';
+
 setupIonicReact();
+initGTM();
 
 const App: React.FC = () => (
   <IonApp>
     <IonReactRouter>
       <IonRouterOutlet>
         <Switch>
+          <Route exact path="/report" component={Report} />
           <Route exact path="/success" component={Success} />
           <Route exact path="/" component={Splash} />
           <Route path="/establishmentNotFound" component={NotFound} />
@@ -44,5 +49,6 @@ const App: React.FC = () => (
   </IonApp>
 );
 
-
 export default App;
+
+
