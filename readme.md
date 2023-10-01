@@ -1,8 +1,8 @@
-##Getting Started
+## Getting Started
 
 - Install Ionic: run "npm install -g @ionic/cli" from the command line
 - Open terminal and cd into a place you want to keep your project
-- Clone the repo: "git clone https://github.com/thekitbag/howzat-client.git"
+- Clone the repo: "git clone https://github.com/thekitbag/harkwise-client.git"
 
 - Run the app locally:
     - cd into the app with "cd ./app"

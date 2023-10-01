@@ -3,10 +3,8 @@ import { IonApp, IonRouterOutlet, setupIonicReact } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 
 import Home from './pages/Home';
-import Splash from './pages/Splash';
 import NotFound from './pages/NotFound';
 import Success from './pages/Success';
-import Report from './pages/ExampleReport';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -38,9 +36,7 @@ const App: React.FC = () => (
     <IonReactRouter>
       <IonRouterOutlet>
         <Switch>
-          <Route exact path="/report" component={Report} />
           <Route exact path="/success" component={Success} />
-          <Route exact path="/" component={Splash} />
           <Route path="/establishmentNotFound" component={NotFound} />
           <Route path="/:establishmentId" component={Home} />
         </Switch>
