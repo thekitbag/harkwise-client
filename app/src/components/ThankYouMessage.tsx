@@ -14,6 +14,8 @@ interface TYMessageProps {
 const TYMessage: React.FC<TYMessageProps> = ({ establishment, rating, publicReviewSites, captureEmail, establishmentId }) => {
     const [submitting, setSubmitting] = useState(false);
     const [submitSuccess, setSubmitSuccess] = useState<boolean | null>(null);
+    const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
 
     
     const iconForSite = (site: string): string | undefined => {
@@ -68,9 +70,10 @@ const TYMessage: React.FC<TYMessageProps> = ({ establishment, rating, publicRevi
     const handleEmailSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setSubmitting(true);
-    
+        setErrorMessage(null); // reset previous error messages
+        
         const email = (e.target as HTMLFormElement)["email"].value;
-    
+        
         try {
             const response = await fetch('/api/captured-emails', {
                 method: 'POST',
@@ -80,28 +83,35 @@ const TYMessage: React.FC<TYMessageProps> = ({ establishment, rating, publicRevi
                 body: JSON.stringify({ email, establishmentId }),
             });
     
+            const responseData = await response.json();
+    
             if (response.ok) {
-                setSubmitSuccess(true);  // Indicate success
+                setSubmitSuccess(true);
             } else {
-                setSubmitSuccess(false);  // Indicate failure
-                console.error('Failed to submit email');
+                setSubmitSuccess(false);
+                if (response.status === 409 && responseData.error === "email_exists") {
+                    setSubmitSuccess(true);
+                } else if (response.status >= 500) {
+                    setErrorMessage('Server error. Please try again later.');
+                } else {
+                    setErrorMessage('Failed to submit email. Please try again.');
+                }
             }
         } catch (error) {
             setSubmitSuccess(false);
-            console.error('Error occurred:', error);
+            setErrorMessage('An unexpected error occurred. Please try again.');
         } finally {
-            setSubmitting(false);  // Reset submission indicator
+            setSubmitting(false);
         }
     };
-    
-    
+       
 
     return (
         <div style={{
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
-            padding: '20px',
+            padding: '14px',
             background: '#f3f4f9'
         }}>
             <IonImg src={harkwiseLogo} alt="Harkwise Logo" style={{ width: '120px', marginBottom: '20px' }} />
@@ -153,8 +163,9 @@ const TYMessage: React.FC<TYMessageProps> = ({ establishment, rating, publicRevi
                         }
 
                         {
-                            submitSuccess === false && <IonText color="danger">Failed to submit email. Please try again.</IonText>
+                            errorMessage && <IonText color="danger">{errorMessage}</IonText>
                         }
+
                     </IonCardContent>
                 </IonCard>
             

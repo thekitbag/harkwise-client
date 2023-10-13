@@ -3,6 +3,7 @@ import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/rea
 import ThankYouMessage from '../components/ThankYouMessage';
 import { useHistory } from 'react-router';
 import ReviewSite from '../utils/types';
+import './Success.css'
 
 
 interface SuccessState {
@@ -26,7 +27,7 @@ const Success: React.FC<SuccessState> = () => {
           <IonTitle>Harkwise</IonTitle>
         </IonToolbar>
       </IonHeader>
-      <IonContent className="ion-padding">
+      <IonContent>
         <ThankYouMessage establishment={establishmentName} rating={rating} publicReviewSites={publicReviewSites} captureEmail={captureEmail} establishmentId={establishmentId} />
       </IonContent>
     </IonPage>

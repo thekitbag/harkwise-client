@@ -1,0 +1,8 @@
+ion-content {
+    overflow: visible;
+    font-size: 40px;
+}
+
+IonButton {
+    height:80px;
+}
