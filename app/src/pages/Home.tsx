@@ -19,6 +19,8 @@ const Home: React.FC = () => {
   const [captureEmail, setCaptureEmail] = useState<boolean>(false);
   const [comment, setComment] = useState('')
   const { establishmentId } = useParams<{ establishmentId?: string }>();
+  const [establishmentLogo, setEstablishmentLogo] = useState<string>('');
+
   const history = useHistory();
 
   useEffect(() => {
@@ -31,6 +33,7 @@ const Home: React.FC = () => {
                     setEstablishmentName(data.name);
                     setPublicReviewSites(data.publicReviewSites || []);
                     setCaptureEmail(data.captureEmail);
+                    setEstablishmentLogo(data.logoURL || '');
                 } else if (response.status === 404 ) {
                     history.push('/establishmentNotFound');
                 }
@@ -101,6 +104,9 @@ const Home: React.FC = () => {
     <IonPage>
         <Header url={'#'}/>
         <IonContent className="main-content ion-padding" color="primary" fullscreen>
+          <div className="business-logo-container">
+            <IonImg className='business-logo' src={establishmentLogo} alt={`${establishmentName} Logo`} />
+        </div>
           <Blurb establishment={establishmentName}/>
           <Rating setRated={setRated}/>              
 

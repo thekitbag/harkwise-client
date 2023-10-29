@@ -88,3 +88,19 @@ ion-header {
     margin-top: 30px;
     color: #1E3D58;
 }
+
+.business-logo-container { 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 150px;
+    width: 100%; 
+    overflow: hidden; 
+}
+
+.business-logo {
+    width: 100%;  
+    height: 100%; 
+    object-fit: contain; /* This will ensure the image fits inside the container without cropping */
+}
+
