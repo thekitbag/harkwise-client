@@ -3,12 +3,13 @@ import { useEffect, useState } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import Blurb from '../components/Blurb';
 import FeedbackBox from '../components/FeedbackBox';
-import FollowUpQuestion from '../components/FollowUpQuestion';
 import Rating from '../components/Rating'
 import SubmitButton from '../components/SubmitButton';
 import ReviewSite from '../utils/types';
 import './Home.css';
+import '../theme/Header.css';
 import mainLogo from '../assets/Original Logo Symbol.png'
+import Header from '../components/Header';
 
 
 const Home: React.FC = () => {
@@ -51,9 +52,9 @@ const Home: React.FC = () => {
 
   const followUpText = () => {
     if(rated.rating > 3.5) {
-      return "What made " + establishmentName  + " so good?"
+      return "What did you like?"
     } else {
-      return "How could " + establishmentName + " have been better?"
+      return "How could your experience have been better?"
     }
   }
 
@@ -98,50 +99,18 @@ const Home: React.FC = () => {
 
   return (
     <IonPage>
-      <IonHeader>
-      <IonToolbar className="logo-toolbar">
-        <IonTitle>Harkwise</IonTitle>
-      </IonToolbar>
-      </IonHeader>
-      <IonContent fullscreen>
-        <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonImg>{mainLogo}</IonImg>
-            <IonTitle size="large">Harkwise</IonTitle>
-          </IonToolbar>
-        </IonHeader>
-        <IonGrid>
-          <IonRow>
-            <IonCol>
-              <Blurb establishment={establishmentName}/>
-            </IonCol>
-          </IonRow>
-          <IonRow>
-            <IonCol>
-              <Rating setRated={setRated}/>              
-            </IonCol>
-          </IonRow>
+        <Header url={'#'}/>
+        <IonContent className="main-content ion-padding" color="primary" fullscreen>
+          <Blurb establishment={establishmentName}/>
+          <Rating setRated={setRated}/>              
 
           {rated.rated === true &&
           <>
-          <IonRow>
-            <IonCol>
-              <FollowUpQuestion followUpQuestion={followUpText()}/>       
-            </IonCol>
-          </IonRow>
-          <IonRow>
-            <IonCol>        
-              <FeedbackBox setComment={setComment}/>              
-            </IonCol>
-          </IonRow>
-          <IonRow>
-            <IonCol>
-              <SubmitButton handleSubmit={handleSubmit}/>              
-            </IonCol>
-          </IonRow>
+            <h2>{followUpText()}</h2>    
+            <FeedbackBox setComment={setComment}/>
+            <SubmitButton handleSubmit={handleSubmit}/> 
           </>
           }
-        </IonGrid>
       </IonContent>
     </IonPage>
   );

@@ -10,9 +10,10 @@ const FeedbackBox: React.FC<FeedbackBoxProps> = ({setComment}) => {
 
   return (
 
-        <IonItem>
-        <IonLabel position="floating">Enter comment (160 characters Max)</IonLabel>
-        <IonTextarea 
+        <IonItem className='feedback-box' color="tertiary">
+        <IonLabel color="primary" position="floating">Enter comment (160 characters Max)</IonLabel>
+        <IonTextarea
+            color="primary"
             value={feedback}
             onIonInput={(e: any) => {
                 const newValue = e.detail.value;

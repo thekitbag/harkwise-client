@@ -6,7 +6,7 @@ interface SubmitButtonProps {
 }
 
 const SubmitButton: React.FC<SubmitButtonProps> = ({handleSubmit}) => {
-    return <IonButton onClick={handleSubmit}>Submit</IonButton>
+    return <IonButton onClick={handleSubmit} color="secondary" expand="block">Submit</IonButton>
 }
 
 export default SubmitButton

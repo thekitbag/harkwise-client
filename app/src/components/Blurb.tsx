@@ -5,7 +5,7 @@ interface BlurbProps {
 }
 
 const Blurb: React.FC<BlurbProps> = ( {establishment} ) => {
-    return <h1>How was your experience at {establishment}?</h1>
+    return <h2>How was your experience at {establishment}?</h2>
 }
 
 export default Blurb

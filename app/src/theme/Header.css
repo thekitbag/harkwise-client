@@ -1,0 +1,29 @@
+/* Style for the toolbar */
+.header-toolbar {
+  --background: var(--ion-color-primary);
+  color: white;
+}
+
+/* Flex container for the logo and title */
+.logo-title-container {
+  display: flex;
+  align-items: center;  /* Vertically centers the items */
+  justify-content: flex-start;  /* Aligns items to the start of the container */
+  height: 100%;  /* Takes full height of the parent */
+}
+
+
+/* Style for the logo */
+.logo {
+  height: 40px;
+  width: auto;
+  margin-right: 15px; /* Space between the logo and the title */
+}
+
+/* Style for the title */
+h1 {
+  font-weight: bold;
+  margin: 0 !important;
+  line-height: 1;  /* Adjusts the height of the text */
+}
+

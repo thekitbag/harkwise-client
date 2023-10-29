@@ -1,38 +1,62 @@
-ion-row {
+:root {
+    --ion-color-primary: #1E3D58;
+    --ion-color-secondary: #48A9A6;
+    --ion-color-tertiary: #E0E0E0;
+}
+
+h1, h2 {
+    font-family: var(--heading-font);
+    margin-bottom: 26px;
     text-align: center;
+    margin-top: 20px;
+}
+
+p {
+    text-align: center;
+    padding-top: 10px;
+}
+
+ion-button {
+    padding: 12px 24px;
+    font-weight: bold;
+    border-radius: 25px; 
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); 
+    transition: all 0.3s ease;
+}
+
+ion-button:hover {
+    --background: var(--ion-color-primary-darken-10);
+    transform: translateY(-2px); 
+}
+
+ion-button:active {
+    --background: var(--ion-color-primary-darken-15);
+}
+
+.main-content {
+    padding-top: 100px;
+}
+
+.secondary-content {
+    background-color: #E0E0E0;;
+}
+
+.logo-title-container {
+    padding: 10px 0; /* Spacing for the logo and title */
 }
 
 ion-header {
-    font-size: 28px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Shadow for the header */
 }
 
-body {
-    background-color: var(--background-color);
-    color: var(--text-primary);
-    font-family: 'Arial', sans-serif;
+.full-text {
+    white-space: normal !important;
+    overflow: visible !important;
+    text-overflow: clip !important;
 }
 
-h1, h2, h3 {
-    color: var(--primary-color);
-}
-
-p, span {
-    color: var(--text-secondary);
-}
-
-button, .btn {
-    background-color: var(--accent-color);
-    border: none;
-    padding: 10px 20px;
-    border-radius: 4px;
-    text-transform: uppercase;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-button:hover, .btn:hover {
-    background-color: darken(var(--accent-color), 10%);
+.link {
+    text-decoration: none;
 }
 
 .emoji {
@@ -43,6 +67,24 @@ button:hover, .btn:hover {
 
 .emoji-container {
     display: flex;
-    justify-content: space-between; /* evenly distribute space between the emojis */
-    align-items: center; /* center them vertically */
+    width: 100%;
+    justify-content: space-between; 
+    align-items: center; 
+    line-height: 100%;
   }
+.rating-container {
+    margin-top: 26px;
+}
+
+.feedback-box {
+    background-color: #E0E0E0;
+}
+
+.contact-card-header {
+    color: #1E3D58;
+}
+
+.contact-form {
+    margin-top: 30px;
+    color: #1E3D58;
+}

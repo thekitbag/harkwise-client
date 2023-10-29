@@ -1,4 +1,4 @@
-import { IonButton, IonCard, IonCardContent, IonIcon } from '@ionic/react'
+import { IonButton, IonCard, IonCardContent, IonIcon, IonItem } from '@ionic/react'
 import { Dispatch, SetStateAction } from 'react';
 import angry from '../assets/1F621.svg';
 import sad from '../assets/1F61E.svg';
@@ -14,27 +14,25 @@ interface RatingProps {
 
 const Rating: React.FC<RatingProps> = ({setRated}) => {
     return ( 
-    <IonCard>
-        <IonCardContent>
-            <div className='emoji-container'>
-                <div onClick = { ()=> setRated({rated: true, rating: 1}) }>
-                    <img src={angry} alt="Angry Emoji" width="75" className='emoji' />
-                </div>
-                <div onClick = { ()=> setRated({rated: true, rating: 2}) }>
-                    <img src={sad} alt="Sad Emoji" width="75" className='emoji'/>
-                </div>
-                <div onClick = { ()=> setRated({rated: true, rating: 3}) }>
-                    <img src={neutral} alt="Neutral Emoji" width="75" className='emoji'/>
-                </div>
-                <div onClick = { ()=> setRated({rated: true, rating: 4}) }>
-                    <img src={like} alt="Like Emoji" width="75" className='emoji'/>
-                </div>
-                <div onClick = { ()=> setRated({rated: true, rating: 5}) }>
-                    <img src={love} alt="Love Emoji" width="75" className='emoji'/>
-                </div>
+    <IonItem color="tertiary" className='rating-container'>
+        <div className='emoji-container'>
+            <div onClick = { ()=> setRated({rated: true, rating: 1}) }>
+                <img src={angry} alt="Angry Emoji" width="75" className='emoji' />
             </div>
-        </IonCardContent>
-    </IonCard>
+            <div onClick = { ()=> setRated({rated: true, rating: 2}) }>
+                <img src={sad} alt="Sad Emoji" width="75" className='emoji'/>
+            </div>
+            <div onClick = { ()=> setRated({rated: true, rating: 3}) }>
+                <img src={neutral} alt="Neutral Emoji" width="75" className='emoji'/>
+            </div>
+            <div onClick = { ()=> setRated({rated: true, rating: 4}) }>
+                <img src={like} alt="Like Emoji" width="75" className='emoji'/>
+            </div>
+            <div onClick = { ()=> setRated({rated: true, rating: 5}) }>
+                <img src={love} alt="Love Emoji" width="75" className='emoji'/>
+            </div>
+        </div>
+    </IonItem>
     );
 };
 
