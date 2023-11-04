@@ -1,6 +1,7 @@
-import { IonCol, IonContent, IonGrid, IonHeader, IonImg, IonPage, IonRow, IonTitle, IonToolbar } from '@ionic/react';
+import { IonContent, IonImg, IonPage} from '@ionic/react';
 import { useEffect, useState } from 'react';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams, useHistory, useLocation } from 'react-router-dom';
+import queryString from 'query-string';
 import Blurb from '../components/Blurb';
 import FeedbackBox from '../components/FeedbackBox';
 import Rating from '../components/Rating'
@@ -8,7 +9,6 @@ import SubmitButton from '../components/SubmitButton';
 import ReviewSite from '../utils/types';
 import './Home.css';
 import '../theme/Header.css';
-import mainLogo from '../assets/Original Logo Symbol.png'
 import Header from '../components/Header';
 
 
@@ -20,8 +20,13 @@ const Home: React.FC = () => {
   const [comment, setComment] = useState('')
   const { establishmentId } = useParams<{ establishmentId?: string }>();
   const [establishmentLogo, setEstablishmentLogo] = useState<string>('');
+  const [reviewMethod, setReviewMethod] = useState<string>('')
 
   const history = useHistory();
+  const location = history.location;
+
+
+
 
   useEffect(() => {
     const fetchEstablishmentDetails = async () => {
@@ -46,8 +51,23 @@ const Home: React.FC = () => {
         }
     };
 
+    const values = queryString.parse(location.search);
+    const scanMethodMap: { [key: string]: string } = {
+      '1': 'Business Card',
+      '2': 'Poster'
+    };
+
+    const scanMethodKey = typeof values.m === 'string' ? values.m : '';
+    const scanMethod = scanMethodMap[scanMethodKey];
+
+    if (scanMethod) {
+        setReviewMethod(scanMethod);
+    }
+
+    console.log("Determined scan method:", scanMethod); // Log the determined scan method
+
     fetchEstablishmentDetails();
-}, [establishmentId]);
+}, [establishmentId, location.search]);
 
 
 
@@ -73,7 +93,8 @@ const Home: React.FC = () => {
           body: JSON.stringify({
             establishmentId: establishmentId,
             comment:comment,
-            rating:rated.rating
+            rating:rated.rating,
+            reviewMethod: reviewMethod
            }),
         });
 
@@ -106,7 +127,7 @@ const Home: React.FC = () => {
         <IonContent className="main-content ion-padding" color="primary" fullscreen>
           <div className="business-logo-container">
             <IonImg className='business-logo' src={establishmentLogo} alt={`${establishmentName} Logo`} />
-        </div>
+          </div>
           <Blurb establishment={establishmentName}/>
           <Rating setRated={setRated}/>              
 
